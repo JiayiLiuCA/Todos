@@ -7,7 +7,8 @@ function Todos(props) {
         <TodoItem 
             todo={todo} 
             key={todo.id} 
-            onChange={() => props.onChange(todo.id)}
+            markComplete={() => props.markComplete(todo.id)}
+            deleteItem={() => props.deleteItem(todo.id)}
         />
 
     );

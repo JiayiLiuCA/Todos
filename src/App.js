@@ -26,24 +26,45 @@ class App extends Component {
         {
           id:4,
           title: 'test',
-          completed: true,
+          completed: false,
         }
       ]
     }
   }
 
-  handleChange(id) {
+  markComplete(id) {
+    let index = this.state.todos.findIndex(x => x.id === id);
     let todos = this.state.todos.slice();
-    todos[id-1].completed = !this.state.todos[id-1].completed;
+    todos[index].completed = !this.state.todos[index].completed;
     this.setState({
-      todos:todos,
+      todos: todos
     });
+
+    //let todos = this.state.todos.slice();
+    //todos[id-1].completed = !this.state.todos[id-1].completed;
+    //this.setState({
+    //  todos:todos,
+    //});
+  }
+
+  deleteItem(id) {
+    console.log(id);
+    let index = this.state.todos.findIndex(x => x.id ===id);
+    let todos = this.state.todos.slice(0,index).concat(this.state.todos.slice(index+1));
+    this.setState({
+      todos: todos
+    })
+    
   }
 
   render() {
     return (
       <div className = "App">
-        <Todos todos={this.state.todos} onChange={(id) => this.handleChange(id)}/>
+        <Todos 
+          todos={this.state.todos} 
+          markComplete={(id) => this.markComplete(id)}
+          deleteItem={(id) => this.deleteItem(id)}
+        />
       </div>
     )
   }
