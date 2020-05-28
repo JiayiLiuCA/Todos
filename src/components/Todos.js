@@ -4,7 +4,11 @@ import Proptypes from 'prop-types';
 
 function Todos(props) {
     const todos = props.todos.map((todo) =>
-        <TodoItem todo={todo} />
+        <TodoItem 
+            todo={todo} 
+            key={todo.id} 
+            onChange={() => props.onChange(todo.id)}
+        />
 
     );
     return (
