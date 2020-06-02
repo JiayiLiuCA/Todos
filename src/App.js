@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Todos from './components/Todos'
 import Header from './components/layout/Header'
 import AddTodo from './components/AddTodo'
+import uuid from 'uuid';
 
 import './App.css';
 
@@ -11,32 +12,32 @@ class App extends Component {
     this.state = {
       todos: [
         {
-          id:1,
+          id: uuid.v4(),
           title: 'Return Macbook',
           completed: false,
         },
         {
-          id:2,
+          id: uuid.v4(),
           title: 'Learn React',
           completed: false,
         },
         {
-          id:3,
+          id: uuid.v4(),
           title: 'File Tax',
           completed: false,
         },
         {
-          id:4,
+          id: uuid.v4(),
           title: 'test',
-          completed: false,
+          completed: true,
         }
       ]
     }
   }
 
   markComplete(id) {
-    let index = this.state.todos.findIndex(x => x.id === id);
-    let todos = this.state.todos.slice();
+    const index = this.state.todos.findIndex(x => x.id === id);
+    const todos = this.state.todos.slice();
     todos[index].completed = !this.state.todos[index].completed;
     this.setState({
       todos: todos
@@ -51,24 +52,38 @@ class App extends Component {
 
   deleteItem(id) {
     console.log(id);
-    let index = this.state.todos.findIndex(x => x.id ===id);
-    let todos = this.state.todos.slice(0,index).concat(this.state.todos.slice(index+1));
+    const index = this.state.todos.findIndex(x => x.id === id);
+    const todos = this.state.todos.slice(0, index).concat(this.state.todos.slice(index + 1));
     this.setState({
       todos: todos
     })
-    
+
+  }
+
+  addTodo = (title) => {
+    const newTodo = {
+      id: uuid.v4(),
+      title: title,
+      completed: false
+    }
+    const todos = this.state.todos.slice().concat(newTodo);
+    this.setState({
+      todos: todos
+    })
   }
 
   render() {
     return (
-      <div className = "App">
-        <Header />
-        <AddTodo />
-        <Todos 
-          todos={this.state.todos} 
-          markComplete={(id) => this.markComplete(id)}
-          deleteItem={(id) => this.deleteItem(id)}
-        />
+      <div className="App">
+        <div className='container'>
+          <Header />
+          <AddTodo addTodo={this.addTodo}/>
+          <Todos
+            todos={this.state.todos}
+            markComplete={id => this.markComplete(id)}
+            deleteItem={id => this.deleteItem(id)}
+          />
+        </div>
       </div>
     )
   }

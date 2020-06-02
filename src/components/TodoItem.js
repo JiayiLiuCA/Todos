@@ -14,7 +14,11 @@ function TodoItem(props) {
     return (
         <div style={itemStyle}>
             <p>
-                <input type='checkbox' onChange={props.markComplete} />
+                <input 
+                    type='checkbox' 
+                    defaultChecked={props.todo.completed} 
+                    onChange={props.markComplete} 
+                />
                 {' '}
                 {props.todo.title}
                 <button style={btnStyle} onClick={props.deleteItem} > x </button>
