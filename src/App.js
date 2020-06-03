@@ -13,6 +13,11 @@ class App extends Component {
       todos: [
         {
           id: uuid.v4(),
+          title: 'Wake up',
+          completed: true,
+        },
+        {
+          id: uuid.v4(),
           title: 'Return Macbook',
           completed: false,
         },
@@ -26,11 +31,6 @@ class App extends Component {
           title: 'File Tax',
           completed: false,
         },
-        {
-          id: uuid.v4(),
-          title: 'test',
-          completed: true,
-        }
       ]
     }
   }
@@ -62,7 +62,7 @@ class App extends Component {
 
   addTodo = (title) => {
     const newTodo = {
-      id: uuid.v4(),
+      id: uuid.v1(),
       title: title,
       completed: false
     }
